@@ -9,7 +9,8 @@ void main() => runApp(
     // initialRoute: '/',
     routes: {
       '/' : (context){return MyAppC();},
-      '/one' : (context){return PagesOne();}
+      '/one' : (context){return PagesOne();},
+      '/two' : (context){return PagesTwo();}
     },
   ));
 

@@ -68,7 +68,10 @@ class FirstPage extends StatelessWidget {
                 new CupertinoButton(
                   child: Text('点击'), 
                   onPressed: () {
-                    log('message');
+                    // Navigator.pushNamed(context, '/one');
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                      return PagesTwo(textData: '233',);
+                    })).then((value){print(value);});
                   },
                   color: Colors.red,
                 ),

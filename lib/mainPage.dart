@@ -4,6 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice/Class/one.dart';
 
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:oktoast/oktoast.dart';
+
 class MyAppC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -46,11 +49,19 @@ class FirstPage extends StatelessWidget {
                         home: new Scaffold(
                           appBar: new AppBar(title: new Text('233344'),),
                           floatingActionButton: FloatingActionButton(onPressed: () {
-                             Navigator.pop(context, '233333333');
+                             Navigator.pop(context, 'Toast');
                           }),
                         ),
                       );
-                    })).then((value){print(value);});
+                    })).then((value){
+                      Fluttertoast.showToast(
+                      msg: value,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIos: 1,
+                      backgroundColor: Color(0xFF9E9E9E),
+                      textColor: Color(0xFFffffff));
+                    });
                   },
                   color: Colors.red,
                 ),

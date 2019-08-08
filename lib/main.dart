@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practice/Class/one.dart';
 // import 'package:flutter_app/home.dart';
 import 'home.dart';
 import 'mainPage.dart';
 
-void main() => runApp(MyAppC());
+void main() => runApp(
+  MaterialApp(
+    // initialRoute: '/',
+    routes: {
+      '/' : (context){return MyAppC();},
+      '/one' : (context){return PagesOne();}
+    },
+  ));
 
 class MyApp extends StatelessWidget {
   @override
@@ -129,6 +137,23 @@ class MyApp extends StatelessWidget {
             ),)
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MyAppD extends StatefulWidget {
+  @override
+  _MyAppDState createState()=>_MyAppDState();
+}
+
+class _MyAppDState extends State<MyAppD> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'ABC',
+      home: Scaffold(
+        body: Container(color: Colors.red,)
       ),
     );
   }

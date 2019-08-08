@@ -30,6 +30,7 @@ class _HomeFramentState extends State<HomeFrament> {
           ClipOval(
             child: Image.asset("WX20190619-192036@2x.png", width: 15.0, height: 15.0,),
           )
+          ,Text('data')
         ],),
         centerTitle: true,
         ),

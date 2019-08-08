@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'mainPage.dart';
 
-void main() => runApp(HomeFrament());
+void main() => runApp(MyAppC());
 
 class MyApp extends StatelessWidget {
   @override

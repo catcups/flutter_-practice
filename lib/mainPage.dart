@@ -76,9 +76,24 @@ class FirstPage extends StatelessWidget {
                   color: Colors.red,
                 ),
                 new CupertinoButton(
-                  child: Text('点击'), 
+                  child: Text('点击2'), 
                   onPressed: () {
-                    log('message');
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                      return new Scaffold(
+                          appBar: new AppBar(title: new Text('23ssdw'),),
+                          floatingActionButton: FloatingActionButton(onPressed: () {
+                             Navigator.pop(context, '23ssdd');
+                          }),
+                    );
+                    })).then((value){
+                      Fluttertoast.showToast(
+                      msg: 'value23ss',
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIos: 1,
+                      backgroundColor: Color(0xFF9E9E9E),
+                      textColor: Color(0xFFffffff));
+                    });
                   },
                   color: Colors.red,
                 ),

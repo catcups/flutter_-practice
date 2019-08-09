@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practice/Class/login.dart';
 import 'package:flutter_practice/Class/one.dart';
 // import 'package:flutter_app/home.dart';
 import 'home.dart';
@@ -11,6 +12,7 @@ void main() => runApp(
       '/' : (context){return MyAppC();},
       '/one' : (context){return PagesOne(textData: null,);},
       '/two' : (context){return PagesTwo();}
+      '/three': (context){return MyAppF();}
     },
   )
 );

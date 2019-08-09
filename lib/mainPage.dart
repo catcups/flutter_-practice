@@ -62,7 +62,7 @@ class FirstPage extends StatelessWidget {
                       backgroundColor: Color(0xFF9E9E9E),
                       textColor: Color(0xFFffffff));
                     });
-                  },
+                },
                   color: Colors.red,
                 ),
                 new CupertinoButton(

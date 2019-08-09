@@ -12,7 +12,8 @@ void main() => runApp(
       '/one' : (context){return PagesOne(textData: null,);},
       '/two' : (context){return PagesTwo();}
     },
-  ));
+  )
+);
 
 class MyApp extends StatelessWidget {
   @override

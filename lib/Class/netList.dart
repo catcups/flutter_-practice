@@ -147,7 +147,6 @@ class NetPage2 extends StatefulWidget {
 
 
 class ShowNetPage2 extends State<NetPage2> {
-  List<int> items = List.generate(10, (i) => i); // 产生数据
 
 
   @override
@@ -165,37 +164,65 @@ class ShowNetPage2 extends State<NetPage2> {
     return new Scaffold(   // 有back
         // appBar: AppBar(title: Text('网络列表Demo'),),
         body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: <Widget>[
-          SliverAppBar(
-            floating: false,
-            title: Text('CustomScrollView'),
-          ),
-          new SliverPadding(
-            padding: const EdgeInsets.all(10.0),
-            sliver: new SliverList(
-              delegate: new SliverChildListDelegate(
-                <Widget>[
-                  Text('Number (2+2)'),
-                  Column(
-                    children: <Widget>[
-                      GestureDetector(
-                        child: Text('Number (2+3)'),
-                        onTap: () {
-                          print('object');
-                        },
-                      )
-                      // 放控件
-                    ],
-                  ),
-                ],
-              ),
+          physics: BouncingScrollPhysics(),
+          slivers: <Widget>[
+            SliverAppBar( // 向上滑动附带隐藏导航
+              floating: false,
+              title: Text('CustomScrollView'),
             ),
-          )
-        ],
+            new SliverPadding(
+              padding: const EdgeInsets.all(10.0),
+              sliver: new SliverList(
+                delegate: new SliverChildListDelegate(
+                  <Widget>[
+                    Text('Number (2+2)'),
+                    Column(
+                      // children: <Widget>[],
+                      children: buildListData(10)
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
       ),
     );
   }
+
+
+  List<Widget> buildListData(int number) {
+      List<Widget> widgetList = new List();
+        for (int i = 0; i < number; i++) {
+          if (i == 2) {
+            widgetList.add(new GestureDetector(
+                        child: Text(' - ', textAlign: TextAlign.left, style: TextStyle(fontSize: 40, backgroundColor: Colors.red, color: Colors.black),),
+                        onTap: () {
+                          print('object ---');
+                        },
+                      ),);
+          } else if (i == 5) {
+            widgetList.add(GestureDetector(
+                        child: Text(' + ', textAlign: TextAlign.right, style: TextStyle(fontSize: 40, backgroundColor: Colors.red, color: Colors.black),),
+                        onTap: () {
+                          print('object +++');
+                        },
+                      ));
+          } else {
+                widgetList.add(new GestureDetector(
+                  onTap: () {
+                    //处理点击事件
+                    print('object == $i');
+                  },
+                  child: new Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: new Image.network("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=495625508,"
+          "3408544765&fm=27&gp=0.jpg")
+                  ),
+                ));
+          }
+        }
+      return widgetList;
+    }
 }
 
 

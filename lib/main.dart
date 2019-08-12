@@ -11,7 +11,7 @@ void main() => runApp(
     routes: {
       '/' : (context){return MyAppC();},
       '/one' : (context){return PagesOne(textData: null,);},
-      '/two' : (context){return PagesTwo();}
+      '/two' : (context){return PagesTwo();},
       '/three': (context){return MyAppF();}
     },
   )

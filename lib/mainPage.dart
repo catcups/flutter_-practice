@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_practice/Class/login.dart';
+import 'package:flutter_practice/Class/netList.dart';
 import 'package:flutter_practice/Class/one.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
@@ -32,7 +34,7 @@ class FirstPage extends StatelessWidget {
                   onPressed: () {
                     // Navigator.pushNamed(context, '/one');
                     Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                      return PagesOne(textData: 'zhiPush',);
+                      return PagesOne(textData: '传值',);
                     })).then((value){print(value);});
                   },
                   color: Colors.red,
@@ -98,12 +100,24 @@ class FirstPage extends StatelessWidget {
                   color: Colors.red,
                 ),
                 new CupertinoButton(
-                  child: Text('点击'), 
+                  child: Text('Login'), 
                   onPressed: () {
-                    log('message');
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                      return MyAppF();
+                    }));
                   },
                   color: Colors.red,
-                )])
+                ),
+                new CupertinoButton(
+                  child: Text('网络列表'), 
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                      return NetPage();
+                    }));
+                  },
+                  color: Colors.red,
+                )
+                ])
                 ],
           ),
     );

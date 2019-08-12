@@ -8,7 +8,7 @@ class MyAppF extends StatelessWidget{
     return MaterialApp(
      
       title:'Beam Utils Home',
-       home: new loginPage2()
+       home: new LoginPage2()
       // home: new homePage()
     );
 
@@ -17,25 +17,25 @@ class MyAppF extends StatelessWidget{
 
 
 
-class loginPage2 extends StatefulWidget {
+class LoginPage2 extends StatefulWidget {
 @override
   State createState(){
-    return new loginPageState2();
+    return new LoginPageState2();
   }
  
 }
 
-class loginPageState2 extends State<loginPage2>{
+class LoginPageState2 extends State<LoginPage2>{
  @override
   
      Widget build(BuildContext context) {
-       final Color backgroundColor1 = Color(0xFF444152);
-       final Color backgroundColor2 = Color(0xFF6f6c7d);
+       final Color backgroundColor1 = Color(0xFFFF00FF);
+       final Color backgroundColor2 = Color(0xFF8A2BE2);
        final Color highlightColor = Color(0xfff65aa3);
        final Color foregroundColor = Colors.white;
 
   return  Scaffold(
-    body:  new login_body().GetLoginContainer(context),
+    body:  new login_body().getLoginContainer(context),
    );
      
      
@@ -56,7 +56,7 @@ class login_body{
        final Color foregroundColor = Colors.white;
 
 
-Container GetLoginContainer(BuildContext context){
+Container getLoginContainer(BuildContext context){
        
        return Container(
          //定义body背景颜色 灰色 渐变

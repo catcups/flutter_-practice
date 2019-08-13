@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
 
+                                // V界特
 void main()=>runApp(new EditTextWidget());
 
 class EditTextWidget extends StatefulWidget{

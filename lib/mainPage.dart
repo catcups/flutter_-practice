@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_practice/Class/login.dart';
 import 'package:flutter_practice/Class/netList.dart';
 import 'package:flutter_practice/Class/one.dart';
+import 'package:flutter_practice/home.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oktoast/oktoast.dart';
@@ -113,6 +114,15 @@ class FirstPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context){
                       return NetPage();
+                    }));
+                  },
+                  color: Colors.red,
+                ),
+                new CupertinoButton(
+                  child: Text('布局'), 
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                      return HomeFrament();
                     }));
                   },
                   color: Colors.red,

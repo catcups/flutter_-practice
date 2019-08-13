@@ -60,8 +60,18 @@ class ShowNetPage extends State<NetPage> {
             // 进度组件添加到我们的ListView
             return _buildProgressIndicator();
           } else {
-            return ListTile(title: new Text("Number $index"),
-            onTap: (){
+            return ListTile(
+              title: new Text("Number $index"),
+              subtitle: new Text(
+                'subTitle===$index',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.red,
+                  backgroundColor: Colors.blue
+                ),
+              ),
+              dense: false,
+              onTap: (){
               Navigator.of(context).push(MaterialPageRoute(builder: (context){
                       return NetPage3();
                     }));
@@ -128,8 +138,6 @@ class ShowNetPage extends State<NetPage> {
       ),
     );
   }
-
-
 }
 
 
@@ -303,6 +311,9 @@ class ShowNetPage3 extends State<NetPage3> {
     String url =
       "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=495625508,"
       "3408544765&fm=27&gp=0.jpg";
+
+
+    
     Widget getItemWidget() {
     //BoxFit 可设置展示图片时 的填充方式
       return new GestureDetector(
@@ -316,10 +327,43 @@ class ShowNetPage3 extends State<NetPage3> {
           //   getDialog();
           // });
         },
-        child: new Container(
-          padding: const EdgeInsets.all(8.0),
-          child: new Image(image: new NetworkImage(url), fit: BoxFit.cover),
-        ),
+        child: new Column(
+          children: <Widget>[
+            new Container(
+                // padding: const EdgeInsets.fromLTRB(8, 0, 0, 40),
+                margin: const EdgeInsets.only(bottom: 0),
+                child: new Image(image: new NetworkImage(url), fit: BoxFit.cover,),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(top: 0),
+              padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+              child: new Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                    new Container(
+                        padding: const EdgeInsets.only(bottom: 0),
+                        height: 40.0,
+                        width: 40.0,
+                        child: new Text('2333', textAlign: TextAlign.center, key: new Key('textResult'),),
+                    ),
+                    new Container(
+                        padding: const EdgeInsets.only(bottom: 0),
+                        height: 40.0,
+                        width: 64.0,
+                        child: new FlatButton(textTheme: ButtonTextTheme.normal, child: new Text('我点---'), onPressed: () {print('我点了点');})
+                    ),
+                    new Container(
+                        padding: const EdgeInsets.only(bottom: 0),
+                        height: 40.0,
+                        width: 64.0,
+                        child: new FlatButton(textTheme: ButtonTextTheme.normal, child: new Text('我点+++'), onPressed: () {print('我点了点');})
+                    ),
+                  ],
+              ),
+            )
+          ],
+        )
       );
     }
 

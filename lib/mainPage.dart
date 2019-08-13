@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_practice/Class/editText.dart';
 import 'package:flutter_practice/Class/login.dart';
 import 'package:flutter_practice/Class/netList.dart';
 import 'package:flutter_practice/Class/one.dart';
@@ -9,8 +10,6 @@ import 'package:flutter_practice/home.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oktoast/oktoast.dart';
-
-import 'editText.dart';
 
 class MyAppC extends StatelessWidget {
   @override

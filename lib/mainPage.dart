@@ -10,6 +10,8 @@ import 'package:flutter_practice/home.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oktoast/oktoast.dart';
 
+import 'editText.dart';
+
 class MyAppC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -126,7 +128,16 @@ class FirstPage extends StatelessWidget {
                     }));
                   },
                   color: Colors.red,
-                )
+                ),
+                new CupertinoButton(
+                  child: Text('输入'), 
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                      return EditTextWidget();
+                    }));
+                  },
+                  color: Colors.red,
+                ),
                 ])
                 ],
           ),

@@ -1,7 +1,5 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
 
 void main()=>runApp(new HomeFrament());
 
@@ -112,7 +110,7 @@ class _HomeFramentState extends State<HomeFrament> {
               padding: EdgeInsets.all(10.0),
               child:ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                child: prefix0.Image.asset('images/20190802190018_ZML4A.jpeg', width: MediaQuery.of(context).size.width, height: 120,fit: BoxFit.cover,),
+                child: Image.asset('images/20190802190018_ZML4A.jpeg', width: MediaQuery.of(context).size.width, height: 120,fit: BoxFit.cover,),
               )
             ),
             SizedBox(
@@ -183,10 +181,10 @@ class _HomeFramentState extends State<HomeFrament> {
                       children: <Widget>[
                       ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                        child: prefix0.Image.asset('images/20190803115834_deyyR.jpeg', width: MediaQuery.of(context).size.width, height: 120,fit: BoxFit.cover,),
+                        child: Image.asset('images/20190803115834_deyyR.jpeg', width: MediaQuery.of(context).size.width, height: 120,fit: BoxFit.cover,),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 5.0, right: 5.0),
+                        padding: EdgeInsets.symmetric(horizontal: 5.0),
                         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                         Text('kankan', style: TextStyle(color: Colors.redAccent),),

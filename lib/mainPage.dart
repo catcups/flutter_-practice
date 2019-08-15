@@ -42,6 +42,22 @@ class FirstPage extends StatelessWidget {
                   color: Colors.red,
                 ),
                 ],),
+                // ListView.builder(
+                //   itemBuilder: (context, index) {
+                //   return Column(children: <Widget>[
+                //   Icon(Icons.done),
+                //   new CupertinoButton(
+                //   child: Text('点击'), 
+                //   onPressed: () {
+                //     // Navigator.pushNamed(context, '/one');
+                //     Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                //       return PagesOne(textData: '传值',);
+                //     })).then((value){print(value);});
+                //   },
+                //   color: Colors.red,
+                // ),
+                // ],);
+                // },itemCount: 2,),
                 Column(children: <Widget>[
                   new CupertinoButton(
                   child: Text('点击'), 
@@ -66,78 +82,78 @@ class FirstPage extends StatelessWidget {
                       backgroundColor: Color(0xFF9E9E9E),
                       textColor: Color(0xFFffffff));
                     });
-                },
+                  },
                   color: Colors.red,
-                ),
-                new CupertinoButton(
-                  child: Text('点击'), 
-                  onPressed: () {
-                    // Navigator.pushNamed(context, '/one');
+                  ),
+                  new CupertinoButton(
+                    child: Text('点击'), 
+                    onPressed: () {
+                      // Navigator.pushNamed(context, '/one');
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                        return PagesTwo(textData: '233',);
+                      })).then((value){print(value);});
+                    },
+                    color: Colors.red,
+                  ),
+                  new CupertinoButton(
+                    child: Text('点击2'), 
+                    onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                      return PagesTwo(textData: '233',);
-                    })).then((value){print(value);});
-                  },
-                  color: Colors.red,
-                ),
-                new CupertinoButton(
-                  child: Text('点击2'), 
-                  onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                      return new Scaffold(
-                          appBar: new AppBar(title: new Text('23ssdw'),),
-                          floatingActionButton: FloatingActionButton(onPressed: () {
-                             Navigator.pop(context, '23ssdd');
-                          }),
-                    );
-                    })).then((value){
-                      Fluttertoast.showToast(
-                      msg: 'value23ss',
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIos: 1,
-                      backgroundColor: Color(0xFF9E9E9E),
-                      textColor: Color(0xFFffffff));
-                    });
-                  },
-                  color: Colors.red,
-                ),
-                new CupertinoButton(
-                  child: Text('Login'), 
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                      return MyAppF();
-                    }));
-                  },
-                  color: Colors.red,
-                ),
-                new CupertinoButton(
-                  child: Text('网络列表'), 
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                      return NetPage();
-                    }));
-                  },
-                  color: Colors.red,
-                ),
-                new CupertinoButton(
-                  child: Text('布局'), 
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                      return HomeFrament();
-                    }));
-                  },
-                  color: Colors.red,
-                ),
-                new CupertinoButton(
-                  child: Text('输入'), 
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                      return EditTextWidget();
-                    }));
-                  },
-                  color: Colors.red,
-                ),
-                ])
+                        return new Scaffold(
+                            appBar: new AppBar(title: new Text('23ssdw'),),
+                            floatingActionButton: FloatingActionButton(onPressed: () {
+                                Navigator.pop(context, '23ssdd');
+                            }),
+                      );
+                      })).then((value){
+                        Fluttertoast.showToast(
+                        msg: 'value23ss',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIos: 1,
+                        backgroundColor: Color(0xFF9E9E9E),
+                        textColor: Color(0xFFffffff));
+                      });
+                    },
+                    color: Colors.red,
+                  ),
+                  new CupertinoButton(
+                    child: Text('Login'), 
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                        return MyAppF();
+                      }));
+                    },
+                    color: Colors.red,
+                  ),
+                  new CupertinoButton(
+                    child: Text('网络列表'), 
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                        return NetPage();
+                      }));
+                    },
+                    color: Colors.red,
+                  ),
+                  new CupertinoButton(
+                    child: Text('布局'), 
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                        return HomeFrament();
+                      }));
+                    },
+                    color: Colors.red,
+                  ),
+                  new CupertinoButton(
+                    child: Text('输入'), 
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                        return EditTextWidget();
+                      }));
+                    },
+                    color: Colors.red,
+                  ),
+                  ])
                 ],
           ),
     );

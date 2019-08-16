@@ -5,11 +5,11 @@ class MainTabBar extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _mainTabBar;
+    return _MainTabBarState();
   }
 }
 
-class _mainTabBar extends State<MainTabBar> {
+class _MainTabBarState extends State<MainTabBar> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

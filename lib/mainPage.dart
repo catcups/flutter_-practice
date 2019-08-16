@@ -20,6 +20,18 @@ class MyAppC extends StatelessWidget {
 }
 
 class FirstPage extends StatelessWidget {
+    // 使用构造创建
+  var list1 = new List();
+  //创建一个int类型的list
+  List intlist = [1, 2, 3];
+  // 创建一个常量List， 不可以改变的List
+  List constList = const['10', 7, 23];
+   //  在数组中可以存放多个不同类型的对象
+  var list = ['push传值', '点击', '点击', '点击', '点击', 
+              '点击', '点击', '点击', '点击', '点击', 
+              '点击', '点击', '点击', '点击', '点击', 
+              '点击', '点击', '点击', '点击', '点击'];
+
   @override
   Widget build(BuildContext context) {
       return new Scaffold(
@@ -33,7 +45,7 @@ class FirstPage extends StatelessWidget {
                 Column(children: <Widget>[
                   Icon(Icons.done),
                   new CupertinoButton(
-                  child: Text('点击'), 
+                  child: Text('点击push'),
                   onPressed: () {
                     // Navigator.pushNamed(context, '/one');
                     Navigator.of(context).push(MaterialPageRoute(builder: (context){

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_practice/Class/login.dart';
 import 'package:flutter_practice/Class/one.dart';
 // import 'package:flutter_app/home.dart';
-import 'home.dart';
 import 'mainPage.dart';
 
 void main() => runApp(

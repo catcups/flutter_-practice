@@ -13,13 +13,14 @@ class _MainTabBarState extends State<MainTabBar> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return DefaultTabController(
+    return Scaffold(body:
+    DefaultTabController(
       length: 4,
       child: Column(
         children: <Widget>[
           Container(
             margin: EdgeInsets.only(top: 5, bottom: 1),
-            width: 750,
+            width: 600,
             height: 60,
             color: Colors.white,
             child: TabBar(
@@ -41,15 +42,28 @@ class _MainTabBarState extends State<MainTabBar> {
             flex: 1,
             child: TabBarView(
               children: <Widget>[
+                Page111(),
                 NetPage3(),
-                NetPage3(),
-                NetPage3(),
+                Page111(),
                 NetPage3()
               ],
             ),
           )
         ],
       ),
+    ));
+  }
+}
+
+class Page111 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      width: 200,
+      height: 444,
+      child: Text('data', style: TextStyle(fontSize: 20, color: Colors.red),),
     );
   }
+  
 }

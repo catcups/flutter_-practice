@@ -44,42 +44,23 @@ class FirstPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                // Column(children: <Widget>[
-                //   Icon(Icons.done),
-                //   new CupertinoButton(
-                //   child: Text('点击push'),
-                //   onPressed: () {
-                //     // Navigator.pushNamed(context, '/one');
-                //     Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                //       return PagesOne(textData: '传值',);
-                //     })).then((value){print(value);});
-                //   },
-                //   color: Colors.red,
+                // Container(
+                //   width:MediaQuery.of(context).size.width / 2,
+                //   child:Column(children: buildMainTileList(context))
                 // ),
-                // ],),
-
-                Container(
-                  width:MediaQuery.of(context).size.width / 2,
-                  child:ListView.builder(
-                    itemBuilder: (context, index) {
-                    return Column(children: <Widget>[
-                    Icon(Icons.done),
-                    new CupertinoButton(
-                    child: Text('点击'), 
-                    onPressed: () {
-                      // Navigator.pushNamed(context, '/one');
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                        return PagesOne(textData: '传值',);
-                      })).then((value){print(value);});
-                    },
-                    color: Colors.red,
-                  ),
-                  ],);
-                  },itemCount: 2,),
+                Column(children: <Widget>[
+                  Icon(Icons.done),
+                  new CupertinoButton(
+                  child: Text(list[0]),
+                  onPressed: () {
+                    // Navigator.pushNamed(context, '/one');
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                      return PagesOne(textData: list[0],);
+                    })).then((value){print(value);});
+                  },
+                  color: Colors.red,
                 ),
-                // Column(
-                //       children: buildMainTileList(context),
-                //     )
+                ],),
                 Container(
                   width:MediaQuery.of(context).size.width / 2,
                   child:
@@ -97,15 +78,19 @@ class FirstPage extends StatelessWidget {
   List<Widget> buildMainTileList(BuildContext context) {
     List<Widget> widgetList = new List();
       for (int i = 1; i < list.length; i++) {
-        print('\n创建widget $i');
+        // print('\n创建widget $i');
         widgetList.add(
-          new CupertinoButton(
-          child: Text(list[i]), 
-          onPressed: () {
-            pushNext(context, i);
-          },
-          color: Colors.red,
-        ));
+          Container(
+            margin: EdgeInsets.all(5),
+            child: new CupertinoButton(
+              child: Text(list[i]), 
+              onPressed: () {
+                pushNext(context, i);
+              },
+              color: Colors.red,
+            )
+          )
+        );
       }
     return widgetList;
   }

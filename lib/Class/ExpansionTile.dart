@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
+import 'package:flutter_practice/Class/ExpansionPageBeanEntity.dart';
+import 'package:flutter_practice/Tool/Request.dart';
 
 class ExpansionTileList extends StatefulWidget {
   @override
@@ -14,6 +15,8 @@ class ExpansionTileList extends StatefulWidget {
 
 
 class _ExpansionTileListState extends State<ExpansionTileList> {
+
+  ExpansionPageBeanEntity expansionPageBeanEntity;
 
   var _ipAddress = 'Unknown';
 
@@ -50,18 +53,27 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
     });
   }
 
-  void getHttp() async {
-  try {
-    Response response = await Dio().get("https://api.acplay.net/api/v2/search/episodes?anime=%E5%A6%96%E7%B2%BE%E7%9A%84%E5%B0%BE%E5%B7%B4");
-    print(response);
-  } catch (e) {
-    print(e);
-  }
-}
+  // void getHttp() async {
+    // try {
+    //   Response response = await Dio().get();
+    //   Map a = json.decode(response.toString());
+    //   expansionPageBeanEntity = ExpansionPageBeanEntity.fromJson(a);
+    //   print(expansionPageBeanEntity.animes.first.animeTitle);
+    // } catch (e) {
+    //   print(e);
+    // }
+  // }
   @override
   void initState() {
     _getIPAddress();
-    getHttp();
+    HttpUtils.getHttp(
+      url: 'https://api.acplay.net/api/v2/search/episodes?anime=%E5%A6%96%E7%B2%BE%E7%9A%84%E5%B0%BE%E5%B7%B4',
+      onCallBack: (value) {
+        Map a = json.decode(value);
+        expansionPageBeanEntity = ExpansionPageBeanEntity.fromJson(a);
+        print(expansionPageBeanEntity.animes.first.animeTitle);
+      }
+    );
     super.initState();
   }
 
@@ -77,6 +89,10 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
           itemBuilder: (BuildContext content, int index) => EntryItem(data[index]),
           itemCount: data.length,
         ),
+        // body: ListView.builder(
+        //   itemBuilder: (BuildContext content, int index) => EntryItem(data[index]),
+        //   itemCount: expansionPageBeanEntity.animes.length,
+        // ),
         floatingActionButton: FloatingActionButton(
           child: Text('Back'),
           onPressed: () {
@@ -85,6 +101,15 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
       ),
     );
   }
+
+  // Widget _buildTiles(Animes root) {
+  //   if (root.children.isEmpty) return ListTile(title: Text(root.title));
+  //   return ExpansionTile(
+  //     key: PageStorageKey<Entry>(root),
+  //     title: Text(root.title),
+  //     children: root.children.map(_buildTiles).toList(),
+  //   );
+  // }
 }
 
 class EntryItem extends StatelessWidget {

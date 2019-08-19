@@ -1,4 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
+
+import 'package:dio/dio.dart';
+
 var httpClient = new HttpClient();
 
 get() async {
@@ -8,6 +12,17 @@ get() async {
   var request = await httpClient.getUrl(uri);
   var response = await request.close();
   // var responseBody = await response.transform(UTF8.decoder).join();
+}
+
+class HttpUtils {
+  static void getHttp({url, onCallBack}) async {
+    try {
+      Response response = await Dio().get(url);
+      onCallBack(response.toString());
+    } catch (e) {
+      print(e);
+    }
+  }
 }
 
 class AccountEntity {
@@ -63,4 +78,3 @@ class BaseEntity<T>{
   
   BaseEntity(this.code, this.message, this.data);
 }
-

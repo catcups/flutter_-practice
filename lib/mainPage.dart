@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_practice/Class/ExpansionTile.dart';
 import 'package:flutter_practice/Class/TabBar.dart';
 import 'package:flutter_practice/Class/editText.dart';
 import 'package:flutter_practice/Class/login.dart';
@@ -99,16 +100,7 @@ class FirstPage extends StatelessWidget {
     switch (index) {
       case 1:
         Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                      return new MaterialApp(
-                        title: '2333',
-                        theme: new ThemeData(primaryColor: Colors.red),
-                        home: new Scaffold(
-                          appBar: new AppBar(title: new Text('233344'),),
-                          floatingActionButton: FloatingActionButton(onPressed: () {
-                             Navigator.pop(context, 'Toast');
-                          }),
-                        ),
-                      );
+                      return ExpansionTileList();
                     })).then((value){
                       Fluttertoast.showToast(
                       msg: value,

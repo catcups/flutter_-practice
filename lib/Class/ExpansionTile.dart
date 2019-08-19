@@ -17,6 +17,7 @@ class ExpansionTileList extends StatefulWidget {
 class _ExpansionTileListState extends State<ExpansionTileList> {
 
   ExpansionPageBeanEntity expansionPageBeanEntity;
+  List<Animes> listData = [];
 
   var _ipAddress = 'Unknown';
 
@@ -72,6 +73,11 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
         Map a = json.decode(value);
         expansionPageBeanEntity = ExpansionPageBeanEntity.fromJson(a);
         print(expansionPageBeanEntity.animes.first.animeTitle);
+
+        // 刷新页面
+        setState(() {
+          print('刷新');
+        });
       }
     );
     super.initState();
@@ -85,13 +91,14 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
       theme: new ThemeData(primaryColor: Colors.red),
       home: new Scaffold(
         appBar: new AppBar(title: new Text('List'),),
-        body: ListView.builder(
-          itemBuilder: (BuildContext content, int index) => EntryItem(data[index]),
-          itemCount: data.length,
-        ),
         // body: ListView.builder(
         //   itemBuilder: (BuildContext content, int index) => EntryItem(data[index]),
-        //   itemCount: expansionPageBeanEntity.animes.length,
+        //   itemCount: data.length,
+        // ),
+        body: childWidget(),
+        // body: ListView.builder(
+        //   itemBuilder: (BuildContext content, int index) => _setTiles(expansionPageBeanEntity.animes[index]),
+        //   itemCount: expansionPageBeanEntity.animes.length
         // ),
         floatingActionButton: FloatingActionButton(
           child: Text('Back'),
@@ -102,14 +109,58 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
     );
   }
 
-  // Widget _buildTiles(Animes root) {
-  //   if (root.children.isEmpty) return ListTile(title: Text(root.title));
-  //   return ExpansionTile(
-  //     key: PageStorageKey<Entry>(root),
-  //     title: Text(root.title),
-  //     children: root.children.map(_buildTiles).toList(),
-  //   );
-  // }
+  Widget childWidget() {
+  Widget childWidget;
+  if (expansionPageBeanEntity != null && expansionPageBeanEntity.animes.length != 0) {
+    childWidget = new Padding(
+      padding: EdgeInsets.all(6.0),
+      child: new ListView.builder(
+        itemCount: expansionPageBeanEntity.animes.length,
+        itemBuilder: (context, item) => _setTiles(expansionPageBeanEntity.animes[item]),
+      ),
+    );
+  } else {
+    childWidget = new Stack(
+      children: <Widget>[
+        new Padding(
+          padding: new EdgeInsets.fromLTRB(0.0, 35.0, 0.0, 0.0),
+          child: new Center(
+            child: new Text('正在加载中，莫着急哦~'),
+          ),
+        ),
+      ],
+    );
+  }
+  return childWidget;
+}
+
+  Widget _setTiles(Animes root) {
+    if (root.episodes.isEmpty) return ListTile(title: Text(root.animeTitle));
+    return ExpansionTile(
+      key: PageStorageKey<Animes>(root),
+      title: Text(root.animeTitle),
+      children: root.episodes.map(_setSubTiles).toList(),
+    );
+  }
+
+  var isSelect = false;
+  Widget _setSubTiles(Episodes subRoot) {
+    return ListTile(title: Text(subRoot.episodeTitle),
+    // key: Key('value'),
+    onTap: (){
+      print('点击了' + subRoot.episodeTitle);
+      setState(() {
+        isSelect = !isSelect;
+        print('是否选择===$isSelect');
+      });
+    },
+    selected: isSelect,);
+    // return ExpansionTile(
+    //   key: PageStorageKey<Animes>(subRoot),
+    //   title: Text(subRoot.animeTitle),
+    //   children: subRoot.episodes.map(_setTiles).toList(),
+    // );
+  }
 }
 
 class EntryItem extends StatelessWidget {

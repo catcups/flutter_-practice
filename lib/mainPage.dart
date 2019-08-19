@@ -28,7 +28,7 @@ class FirstPage extends StatelessWidget {
   // 创建一个常量List， 不可以改变的List
   List constList = const['10', 7, 23];
    //  在数组中可以存放多个不同类型的对象
-  var list = ['push传值', '点击', '点击1', '点击2', 'Login', 
+  var list = ['push传值', '网络搜索', '点击1', '点击2', 'Login', 
               '网络列表', '布局', '输入', 'TabBar', '点击9', 
               '点击10', '点击11', '点击12', '点击13', '点击14', 
               '点击15', '点击16', '点击17', '点击18', '点击2333'];

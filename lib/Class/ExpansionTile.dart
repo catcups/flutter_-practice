@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_practice/Class/ExpansionPageBeanEntity.dart';
 import 'package:flutter_practice/Tool/Request.dart';
+
+import 'AppbarSearch.dart';
 
 class ExpansionTileList extends StatefulWidget {
   @override
@@ -20,6 +23,8 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
   List<Animes> listData = [];
 
   var _ipAddress = 'Unknown';
+
+  var mTextFieldController;
 
   _getIPAddress() async {
     var url = 'https://httpbin.org/ip';
@@ -90,7 +95,19 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
       title: '2333',
       theme: new ThemeData(primaryColor: Colors.red),
       home: new Scaffold(
-        appBar: new AppBar(title: new Text('List'),),
+        appBar: new SearchAppBarWidget(
+              focusNode: FocusNode(),
+              controller: mTextFieldController,
+              elevation: 2.0,
+              leading: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(50),
+              ],
+              onEditingComplete: () => _checkInput()),
         // body: ListView.builder(
         //   itemBuilder: (BuildContext content, int index) => EntryItem(data[index]),
         //   itemCount: data.length,
@@ -106,6 +123,21 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
             Navigator.pop(context, 'Toast');
         }),
       ),
+    );
+  }
+
+  void _checkInput() {
+    HttpUtils.getHttp(
+      url: 'https://api.acplay.net/api/v2/search/episodes?anime=' + mTextFieldController.text,
+      onCallBack: (value) {
+        Map a = json.decode(value);
+        expansionPageBeanEntity = ExpansionPageBeanEntity.fromJson(a);
+        print(expansionPageBeanEntity.animes.first.animeTitle);
+        // 刷新页面
+        setState(() {
+          print('刷新');
+        });
+      }
     );
   }
 
@@ -230,5 +262,4 @@ const List<Entry> data = <Entry>[
     ]
   ),
 ];
-
 

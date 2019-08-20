@@ -23,6 +23,15 @@ class HttpUtils {
       print(e);
     }
   }
+
+    static void getRequest({url, onCallBack, catchBack}) async {
+    try {
+      Response response = await Dio().get(url);
+      onCallBack(response.toString());
+    } catch (e) {
+      catchBack(e);
+    }
+  }
 }
 
 class AccountEntity {

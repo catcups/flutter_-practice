@@ -260,7 +260,7 @@ class ListSearchPage extends SearchDelegate<String> {
   @override
   // 用户从搜索页面提交搜索后显示的结果
   Widget buildResults(BuildContext context) {
-    HttpUtils.getHttp(
+    HttpUtils.getRequest(
       url: 'https://api.acplay.net/api/v2/search/episodes?anime=' + query.trim(),
       onCallBack: (value) {
         Map a = json.decode(value);
@@ -269,6 +269,13 @@ class ListSearchPage extends SearchDelegate<String> {
           print('网络请求' + expansionEntity.animes.first.animeTitle);
         }
         // expansionEntity.animes.map();
+        // return childWidget();
+        // setState(() {
+        // });
+      },
+      catchBack: (value) {
+        print('网络请求bad');
+        expansionEntity = null;
         // return childWidget();
         // setState(() {
         // });

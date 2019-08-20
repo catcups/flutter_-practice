@@ -37,7 +37,7 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
     try {
       var request = await httpClient.getUrl(Uri.parse(url));
       var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
+      if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         var data = jsonDecode(json);
         result = data['origin'];
@@ -276,7 +276,13 @@ class ListSearchPage extends SearchDelegate<String> {
         expansionEntity = ExpansionPageBeanEntity.fromJson(value);
         if (expansionEntity.success) {
           if (expansionEntity.animes.length > 0) {
-            print('网络请求 ' + expansionEntity.animes.first.animeTitle);
+            debugPrint('网络请求 ' + expansionEntity.animes.first.animeTitle);
+            expansionEntity.animes.map((f){
+              debugPrint('map===' + f.animeTitle);
+            });
+            expansionEntity.animes.forEach((f){
+              debugPrint('forEach===' + f.animeTitle);
+            });
           } else {
             print('网络请求空数据');
           }
@@ -285,10 +291,9 @@ class ListSearchPage extends SearchDelegate<String> {
           print('网络请求失败');
           expansionEntity = null;
         }
-        // expansionEntity.animes.map();
-        setState(() {
-        // 刷新
-        });
+        // setState(() {
+        // // 刷新
+        // });
       },
       catchBack: (value) {
         print('网络请求bad');

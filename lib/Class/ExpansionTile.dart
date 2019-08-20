@@ -146,12 +146,19 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
   }
 
   Widget childWidget() {
+    // return new Padding(
+    //   padding: EdgeInsets.all(6.0),
+    //   child: new ListView.builder(
+    //     itemCount: expansionPageBeanEntity  == null ? 0 : expansionPageBeanEntity.animes.length,
+    //     itemBuilder: (context, item) => _setTiles(expansionPageBeanEntity.animes[item]),
+    //   ),
+    // );
   Widget childWidget;
   if (expansionPageBeanEntity != null && expansionPageBeanEntity.animes.length != 0) {
     childWidget = new Padding(
       padding: EdgeInsets.all(6.0),
       child: new ListView.builder(
-        itemCount: expansionPageBeanEntity.animes.length,
+        itemCount: expansionPageBeanEntity  == null ? 0 : expansionPageBeanEntity.animes.length,
         itemBuilder: (context, item) => _setTiles(expansionPageBeanEntity.animes[item]),
       ),
     );
@@ -220,6 +227,9 @@ class EntryItem extends StatelessWidget {
   }
 }
 
+
+
+// TODO:搜索
 class ListSearchPage extends SearchDelegate<String> {
   List<String> list;
   String select;
@@ -276,7 +286,9 @@ class ListSearchPage extends SearchDelegate<String> {
           expansionEntity = null;
         }
         // expansionEntity.animes.map();
-        return childWidget();
+        setState(() {
+        // 刷新
+        });
       },
       catchBack: (value) {
         print('网络请求bad');

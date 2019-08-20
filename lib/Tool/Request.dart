@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_practice/Tool/proxy.dart';
 
 var httpClient = new HttpClient();
 
@@ -23,10 +24,21 @@ class HttpUtils {
       print(e);
     }
   }
-  
+
   static void getRequest({url, onCallBack, catchBack}) async {
+    var dio = new Dio();
+    // dio.interceptors.add(CookieManager(PersistCookieJar()));
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.findProxy = (uri) {
+        //proxy all request to localhost:8888
+        return "PROXY localhost:8888";
+      };
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+    };
     try {
-      Response response = await Dio().get(url);
+      Response response = await dio.get(url);
       onCallBack(response.toString());
     } catch (e) {
       catchBack(e);

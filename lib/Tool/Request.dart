@@ -39,9 +39,10 @@ class HttpUtils {
     };
     try {
       Response response = await dio.get(url);
-      onCallBack(response.toString());
+      onCallBack(response.data);
     } catch (e) {
-      catchBack(e);
+      print('catch===' + e.message);
+      catchBack(e.toString());
     }
   }
 }

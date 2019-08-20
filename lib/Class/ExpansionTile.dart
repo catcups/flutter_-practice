@@ -263,10 +263,17 @@ class ListSearchPage extends SearchDelegate<String> {
     HttpUtils.getRequest(
       url: 'https://api.acplay.net/api/v2/search/episodes?anime=' + query.trim(),
       onCallBack: (value) {
-        Map a = json.decode(value);
-        expansionEntity = ExpansionPageBeanEntity.fromJson(a);
+        expansionEntity = ExpansionPageBeanEntity.fromJson(value);
         if (expansionEntity.success) {
-          print('网络请求' + expansionEntity.animes.first.animeTitle);
+          if (expansionEntity.animes.length > 0) {
+            print('网络请求' + expansionEntity.animes.first.animeTitle);
+          } else {
+            print('网络请求空数据');
+          }
+        } else {
+          print(expansionEntity.errorMessage);
+          print('网络请求失败');
+          expansionEntity = null;
         }
         // expansionEntity.animes.map();
         // return childWidget();
@@ -311,7 +318,7 @@ class ListSearchPage extends SearchDelegate<String> {
   /// 当用户在搜索字段中键入查询时，在搜索页面正文中显示的建议
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
-    print('buildSuggestions===' + query.trim());
+    // print('buildSuggestions===' + query.trim());
     var filterList = list.where((String s) => s.contains(query.trim()));
     return ListView(
       children: <Widget>[

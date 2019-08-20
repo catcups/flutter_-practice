@@ -19,6 +19,9 @@ class ExpansionTileList extends StatefulWidget {
 
 class _ExpansionTileListState extends State<ExpansionTileList> {
 
+  List<String> _list = List.generate(100, (i) => 'item $i');
+
+
   ExpansionPageBeanEntity expansionPageBeanEntity;
   List<Animes> listData = [];
 
@@ -89,25 +92,41 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     // TODO: implement build
     return new MaterialApp(
       title: '2333',
       theme: new ThemeData(primaryColor: Colors.red),
       home: new Scaffold(
-        appBar: new SearchAppBarWidget(
-              focusNode: FocusNode(),
-              controller: mTextFieldController,
-              elevation: 2.0,
-              leading: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }),
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(50),
-              ],
-              onEditingComplete: () => _checkInput()),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text('搜索'),
+          actions: <Widget>[
+            IconButton(
+              tooltip: 'Search',
+              icon: const Icon(Icons.search),
+              onPressed: () async {
+                final String selected = await showSearch<String>(
+                  context: context,
+                  delegate: ListSearchPage(_list),
+                );
+              },
+            )
+          ],
+        ),
+        // appBar: new SearchAppBarWidget(
+        //       focusNode: FocusNode(),
+        //       controller: mTextFieldController,
+        //       elevation: 2.0,
+        //       leading: IconButton(
+        //           icon: Icon(Icons.arrow_back),
+        //           onPressed: () {
+        //             Navigator.pop(context);
+        //           }),
+        //       inputFormatters: [
+        //         LengthLimitingTextInputFormatter(50),
+        //       ],
+        //       onEditingComplete: () => _checkInput()),
         // body: ListView.builder(
         //   itemBuilder: (BuildContext content, int index) => EntryItem(data[index]),
         //   itemCount: data.length,
@@ -123,21 +142,6 @@ class _ExpansionTileListState extends State<ExpansionTileList> {
             Navigator.pop(context, 'Toast');
         }),
       ),
-    );
-  }
-
-  void _checkInput() {
-    HttpUtils.getHttp(
-      url: 'https://api.acplay.net/api/v2/search/episodes?anime=' + mTextFieldController.text,
-      onCallBack: (value) {
-        Map a = json.decode(value);
-        expansionPageBeanEntity = ExpansionPageBeanEntity.fromJson(a);
-        print(expansionPageBeanEntity.animes.first.animeTitle);
-        // 刷新页面
-        setState(() {
-          print('刷新');
-        });
-      }
     );
   }
 
@@ -213,6 +217,172 @@ class EntryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return _buildTiles(entry);
+  }
+}
+
+class ListSearchPage extends SearchDelegate<String> {
+  List<String> list;
+  String select;
+
+  ListSearchPage(this.list);
+
+  @override
+  appBarTheme(BuildContext context) {
+    return Theme.of(context);
+  }
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // TODO: implement buildActions
+    return [
+      IconButton(
+        icon: Icon(Icons.close),
+        onPressed: () {
+          print('query=' + query.trim());
+          query = '';
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // TODO: implement buildLeading
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        print('context=' + query.trim());
+        close(context, '');
+      },
+    );
+  }
+
+  @override
+  // 用户从搜索页面提交搜索后显示的结果
+  Widget buildResults(BuildContext context) {
+    HttpUtils.getHttp(
+      url: 'https://api.acplay.net/api/v2/search/episodes?anime=' + query.trim(),
+      onCallBack: (value) {
+        Map a = json.decode(value);
+        expansionEntity = ExpansionPageBeanEntity.fromJson(a);
+        if (expansionEntity.success) {
+          print('网络请求' + expansionEntity.animes.first.animeTitle);
+        }
+        // expansionEntity.animes.map();
+        // return childWidget();
+        // setState(() {
+        // });
+      }
+    );
+    print('网络请求 return Widget');
+    return childWidget();
+
+    // TODO: implement buildResults
+    print('buildResults' + query.trim());
+    var filterList = list.where((String s) => s.contains(query.trim()));
+    return ListView(
+      children: <Widget>[
+        for (String item in filterList)
+          ListTile(
+            leading: Icon(
+              Icons.message,
+              color: Colors.blue,
+            ),
+            title: Text(
+              item,
+              style: Theme.of(context).textTheme.title,
+            ),
+            onTap: () {
+              close(context, item);
+            },
+          ),
+      ],
+    );
+  }
+
+  @override
+  /// 当用户在搜索字段中键入查询时，在搜索页面正文中显示的建议
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+    print('buildSuggestions===' + query.trim());
+    var filterList = list.where((String s) => s.contains(query.trim()));
+    return ListView(
+      children: <Widget>[
+        for (String item in filterList)
+          ListTile(
+            leading: Icon(Icons.message),
+            title: Text(
+              item,
+              style: Theme.of(context).textTheme.title,
+            ),
+            onTap: () {
+              close(context, item);
+            },
+          ),
+      ],
+    );
+  }
+
+  ExpansionPageBeanEntity expansionEntity;
+  List<Animes> listData = [];
+
+  // bool hasMore;
+  // List<Animes> animes;
+  // int errorCode;
+  // bool success;
+  // String errorMessage;
+
+  Widget childWidget() {
+  Widget childWidget;
+  // if (expansionEntity == null) {
+  //   print('search=== null');
+  // } else {
+  //   print('search=== !=null');
+  //   if (expansionEntity.animes != null) {
+  //     print('animes !=null');
+  //   } else {
+  //     print('animes ==null');
+  //     print(expansionEntity.success);
+  //   }
+  // }
+  if (expansionEntity != null && expansionEntity.success && expansionEntity.animes.length != 0) {
+    childWidget = new Padding(
+      padding: EdgeInsets.all(6.0),
+      child: new ListView.builder(
+        itemCount: expansionEntity.animes.length,
+        itemBuilder: (context, item) => _setTiles(expansionEntity.animes[item]),
+      ),
+    );
+  } else {
+    childWidget = new Stack(
+      children: <Widget>[
+        new Padding(
+          padding: new EdgeInsets.fromLTRB(0.0, 35.0, 0.0, 0.0),
+          child: new Center(
+            child: new Text('正在加载中，莫着急哦~'),
+          ),
+        ),
+      ],
+    );
+  }
+  return childWidget;
+}
+
+  Widget _setTiles(Animes root) {
+    if (root.episodes.isEmpty) return ListTile(title: Text(root.animeTitle));
+    return ExpansionTile(
+      key: PageStorageKey<Animes>(root),
+      title: Text(root.animeTitle),
+      children: root.episodes.map(_setSubTiles).toList(),
+    );
+  }
+
+  Widget _setSubTiles(Episodes subRoot) {
+    return ListTile(title: Text(subRoot.episodeTitle),
+    // key: Key('value'),
+    onTap: (){
+      print('点击了' + subRoot.episodeTitle);
+    },);
   }
 }
 

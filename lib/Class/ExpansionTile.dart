@@ -266,7 +266,7 @@ class ListSearchPage extends SearchDelegate<String> {
         expansionEntity = ExpansionPageBeanEntity.fromJson(value);
         if (expansionEntity.success) {
           if (expansionEntity.animes.length > 0) {
-            print('网络请求' + expansionEntity.animes.first.animeTitle);
+            print('网络请求 ' + expansionEntity.animes.first.animeTitle);
           } else {
             print('网络请求空数据');
           }
@@ -276,16 +276,11 @@ class ListSearchPage extends SearchDelegate<String> {
           expansionEntity = null;
         }
         // expansionEntity.animes.map();
-        // return childWidget();
-        // setState(() {
-        // });
+        return childWidget();
       },
       catchBack: (value) {
         print('网络请求bad');
         expansionEntity = null;
-        // return childWidget();
-        // setState(() {
-        // });
       }
     );
     print('网络请求 return Widget');
@@ -339,12 +334,6 @@ class ListSearchPage extends SearchDelegate<String> {
 
   ExpansionPageBeanEntity expansionEntity;
   List<Animes> listData = [];
-
-  // bool hasMore;
-  // List<Animes> animes;
-  // int errorCode;
-  // bool success;
-  // String errorMessage;
 
   Widget childWidget() {
   Widget childWidget;

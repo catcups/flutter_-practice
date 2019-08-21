@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice/Class/ExpansionTile.dart';
+import 'package:flutter_practice/Class/ListViewHeader.dart';
 import 'package:flutter_practice/Class/TabBar.dart';
 import 'package:flutter_practice/Class/editText.dart';
 import 'package:flutter_practice/Class/login.dart';
@@ -169,7 +170,7 @@ class FirstPage extends StatelessWidget {
         break;
       case 10:
         Navigator.of(context).push(MaterialPageRoute(builder: (context){
-              return EditTextWidget();
+              return NewsListPage();
             }));
         break;
       case 11:

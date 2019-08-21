@@ -72,7 +72,6 @@ class _ListViewHeaderState extends State<ListViewHeaderPage> {
     if (index < getHeaderCount()) {
       return _headerItemWidget(context, index);
     } else {
-      print('$index  ===  ${getHeaderCount()}');
       int pos = index - getHeaderCount();
       return _itemBuildWidget(context, pos);
     }
@@ -139,18 +138,18 @@ class NewsListPageState extends State<NewsListPage> {
   }
 
   _getNewsListData() async {
+    print('啊？？？？？');
     Future.delayed(const Duration(seconds:1), () {
           List<NewsItem> tempList = [];
           for (var i = 0; i < 99; i++) {
             NewsItem news = new NewsItem();
-            news.nid = int.parse('nid');
+            news.nid = 12;//int.parse('nid');
             news.nodeTitle = 'ASDFGHJK+++$i';
-            news.node_created = int.parse('node_created');
+            news.node_created = 22;//int.parse('node_created');
             news.total_count = 'totalcount';
             news.node_type = 'node_type';
             news.thumbPath = 'field_news_video_thumb_app';
             news.news_category = 'field_news_category.toString()';
-            print(news.news_category);
             tempList.add(news);
           }
           setState(() {
@@ -227,7 +226,8 @@ class NewsListPageState extends State<NewsListPage> {
               AspectRatio(
                 aspectRatio: 118 / 66,
                 child: FadeInImage.memoryNetwork(
-                  placeholder: Uint8List('''http://img.mukewang.com/user/584ff8bf0001609c01000100-100-100.jpg'''.length),
+                  // placeholder: Uint8List('''http://img.mukewang.com/user/584ff8bf0001609c01000100-100-100.jpg'''.length),
+                  placeholder: Uint8List(1),
                   image: newsList[pos].thumbPath,
                   fit: BoxFit.cover,
                 ),

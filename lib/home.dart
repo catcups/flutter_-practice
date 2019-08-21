@@ -30,8 +30,13 @@ class _HomeFramentState extends State<HomeFrament> {
           Stack(
             alignment: Alignment(1.0, -1.0),
             children: <Widget>[
-            ClipOval(
-              child: Image.asset('WX20190619-192036@2x.png', width: MediaQueryData.fromWindow(window).padding.top, height: 35.0,),
+            GestureDetector(
+              child: ClipOval(
+                child: Image.asset('WX20190619-192036@2x.png', width: MediaQueryData.fromWindow(window).padding.top, height: 35.0,),
+              ),
+              onTap: (){
+                Navigator.pop(context);
+              },
             ),
             Container(
               width: 10.0,height: 10.0,

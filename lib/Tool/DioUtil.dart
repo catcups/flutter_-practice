@@ -17,11 +17,11 @@ class SharedPreferences {
 
   }
   getString(String abc) {
-    
+
   }
 }
 
-class DioUtil{
+class DioUtil {
   static Dio dio = new Dio();
   //请求部分
   static Future request(url,{formData})async{

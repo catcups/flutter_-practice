@@ -28,15 +28,18 @@ class HttpUtils {
   static void getRequest({url, onCallBack, catchBack}) async {
     var dio = new Dio();
     // dio.interceptors.add(CookieManager(PersistCookieJar()));
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (HttpClient client) {
-      client.findProxy = (uri) {
-        //proxy all request to localhost:8888
-        return "PROXY localhost:8888";
-      };
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-    };
+    // TODO: 上线必须把抓包的代理注释掉！！！
+    // (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+    //     (HttpClient client) {
+    //   client.findProxy = (uri) {
+    //     //proxy all request to localhost:8888
+    //     return "PROXY localhost:8888";
+    //   };
+    //   client.badCertificateCallback =
+    //       (X509Certificate cert, String host, int port) => true;
+    // };
+    // TODO: 上线必须把上方抓包的代理注释掉！！！
+
     try {
       Response response = await dio.get(url);
       onCallBack(response.data);

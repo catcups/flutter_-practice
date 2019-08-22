@@ -6,9 +6,25 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class TextFieldPage extends StatelessWidget {
+class TextFieldPage extends StatefulWidget {
+  TextFieldPage({Key key}) : super(key: key);
+
+  _TextFieldPageState createState() => _TextFieldPageState();
+}
+
+class _TextFieldPageState extends State<TextFieldPage> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//        child: child,
+//     );
+//   }
+// }
+
+// class TextFieldPage extends StatelessWidget {
   var _textEditingController = new TextEditingController();
   FocusNode _contentFocusNode = FocusNode();
+  AlignmentDirectional _alignmentDirectional = AlignmentDirectional.topStart;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +42,10 @@ class TextFieldPage extends StatelessWidget {
 
   // 输入框加按钮
   List <Widget> _buildCenterWidget(BuildContext context) {
+    const kAlignmentType = <String, AlignmentDirectional> {
+      'topStart':AlignmentDirectional.topStart,
+      'topCenter':AlignmentDirectional.topCenter,
+    };
     return [
       new TextField(
             decoration: new InputDecoration(
@@ -83,7 +103,38 @@ class TextFieldPage extends StatelessWidget {
             }
           },
         ),
+        _getButtonBar(context),
     ];
+  }
+
+  Widget _getButtonBar(BuildContext context) {
+    const kAlignmentType = <String, AlignmentDirectional> {
+      'Start':AlignmentDirectional.topStart,
+      'Center':AlignmentDirectional.topCenter,
+    };
+    // return Material(
+    //   color: Theme.of(context).primaryColorLight,
+    //   child: 
+    return  Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(title: Text('data'),
+          trailing: DropdownButton<AlignmentDirectional>(
+            value: _alignmentDirectional,
+            onChanged: (AlignmentDirectional newValue) {
+              if (newValue != null) {
+                setState(() => this._alignmentDirectional = newValue);
+              }
+            },
+            items: kAlignmentType.map((String name,AlignmentDirectional val) => MapEntry(
+                name, 
+                DropdownMenuItem(value: val,child: Text(name)))
+                ).values.toList()
+            ),
+          ),
+        ],
+      );
+    // );
   }
 
 

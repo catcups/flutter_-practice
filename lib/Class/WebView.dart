@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_practice/Class/WebView_demo.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class TextFieldPage extends StatefulWidget {
   TextFieldPage({Key key}) : super(key: key);
@@ -30,7 +28,7 @@ class _TextFieldPageState extends State<TextFieldPage> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        appBar: AppBar(title: Text('baidu:'''),),
+        appBar: AppBar(title: Text('baidu:''3'),),
         body: Center(
           child: Column(
             children: _buildCenterWidget(context)
@@ -78,24 +76,18 @@ class _TextFieldPageState extends State<TextFieldPage> {
             _contentFocusNode.unfocus();
             if (_textEditingController.text == '') {
               print('动漫新番');
-              String url = 'https://baike.baidu.com/item/' + '动漫新番';
+              String url = 'https://baike.baidu.com/item/' + '动画新番';
               print(this._alignmentDirectional);
               Navigator.of(context).push(MaterialPageRoute(builder: (context){
-              return Scaffold(
-                appBar: AppBar(title: Text('data'),),
-                body: _showWebView(context, url),
-              );
-                return Widget_WebView_Page();
+                return FlutterWebView(url: url, barTitle: '233',);
               }));
             }
             if (_textEditingController.text != '') {
               print(_textEditingController.text);
               String url = 'https://baike.baidu.com/item/' + _textEditingController.text;
               Navigator.of(context).push(MaterialPageRoute(builder: (context){
-              //   return Scaffold(
-              //   body: _showWebView(context, url),
-              // );
-                return Widget_WebView_Page();
+                return FlutterWebView(url: url, barTitle: '233',);
+                // return Widget_WebView_Page();
               }));
             }
           },
@@ -188,78 +180,16 @@ class _TextFieldPageState extends State<TextFieldPage> {
     );
   }
 
-
-
-  final Completer<WebViewController> _controller = Completer<WebViewController>();
-
-
-  ///初始化webview显示
-  Widget _showWebView(BuildContext context, String url) {
-    return WebView(
-      initialUrl: url,///初始化url
-      javascriptMode: JavascriptMode.unrestricted,///JS执行模式
-      onWebViewCreated: (WebViewController webViewController) {///在WebView创建完成后调用，只会被调用一次
-        //
-        //
-        _controller.complete(webViewController);
-      },
-      javascriptChannels: <JavascriptChannel>[///JS和Flutter通信的Channel；
-        _alertJavascriptChannel(context),
-      ].toSet(),
-      navigationDelegate: (NavigationRequest request) {//路由委托（可以通过在此处拦截url实现JS调用Flutter部分）；
-        ///通过拦截url来实现js与flutter交互
-        if (request.url.startsWith('js://webview')) {
-          Fluttertoast.showToast(msg:'JS调用了Flutter By navigationDelegate');
-          print('blocking navigation to $request}');
-          return NavigationDecision.prevent;///阻止路由替换，不能跳转，因为这是js交互给我们发送的消息
-        }
-
-        return NavigationDecision.navigate;///允许路由替换
-      },
-      onPageFinished: (String url) {///页面加载完成回调
-        // setState(() {
-        //   _loading = false;
-        // });
-        print('Page finished loading: $url');
-      },
-
-    );
-  }
-
-  ///js与flutter交互
-  JavascriptChannel _alertJavascriptChannel(BuildContext context) {
-    return JavascriptChannel(
-        name: 'invoke',//invoke要和网页协商一致
-        onMessageReceived: (JavascriptMessage message) {
-          print(message.message);
-
-        });
-  }
-
-  ///组合脚本执行方法，将数据发送给js端（flutter与js交互）
-  void _onExecJavascript(String url) async {
-    _controller.future.then((controller) {
-      controller.loadUrl(url);
-    });
-    //或者 evaluateJavascript('callJS("js方法")')
-  }
-
 }
-
-
-
 
 
 class Widget_WebView_Page extends StatefulWidget {
+  Widget_WebView_Page({Key key}) : super(key: key);
 
-  @override
-  State<StatefulWidget> createState() {
-    return Widget_WebView_State();
-  }
-
+  _Widget_WebView_PageState createState() => _Widget_WebView_PageState();
 }
 
-class Widget_WebView_State extends State<Widget_WebView_Page>
+class _Widget_WebView_PageState extends State<Widget_WebView_Page>
     with SingleTickerProviderStateMixin {
   FlutterWebviewPlugin flutterWebviewPlugin = FlutterWebviewPlugin();
   var title = "WebView组件";
@@ -285,26 +215,26 @@ class Widget_WebView_State extends State<Widget_WebView_Page>
     /**
      * 监听web页加载状态
      */
-    flutterWebviewPlugin.onStateChanged.listen((
-        WebViewStateChanged webViewState) async {
-//      setState(() {
-//        title = webViewState.type.toString();
-//      });
-      switch (webViewState.type) {
-        case WebViewState.finishLoad:
-          handleJs();
+//     flutterWebviewPlugin.onStateChanged.listen((
+//         WebViewStateChanged webViewState) async {
+// //      setState(() {
+// //        title = webViewState.type.toString();
+// //      });
+//       switch (webViewState.type) {
+//         case WebViewState.finishLoad:
+//           handleJs();
 
-          getWebTitle();
+//           getWebTitle();
 
-          break;
-        case WebViewState.shouldStart:
-          break;
-        case WebViewState.startLoad:
-          break;
-        case WebViewState.abortLoad:
-          break;
-      }
-    });
+//           break;
+//         case WebViewState.shouldStart:
+//           break;
+//         case WebViewState.startLoad:
+//           break;
+//         case WebViewState.abortLoad:
+//           break;
+//       }
+//     });
 
     /**
      * 监听页面加载url

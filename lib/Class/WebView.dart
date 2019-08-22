@@ -42,10 +42,6 @@ class _TextFieldPageState extends State<TextFieldPage> {
 
   // 输入框加按钮
   List <Widget> _buildCenterWidget(BuildContext context) {
-    const kAlignmentType = <String, AlignmentDirectional> {
-      'topStart':AlignmentDirectional.topStart,
-      'topCenter':AlignmentDirectional.topCenter,
-    };
     return [
       new TextField(
             decoration: new InputDecoration(
@@ -83,6 +79,7 @@ class _TextFieldPageState extends State<TextFieldPage> {
             if (_textEditingController.text == '') {
               print('动漫新番');
               String url = 'https://baike.baidu.com/item/' + '动漫新番';
+              print(this._alignmentDirectional);
               Navigator.of(context).push(MaterialPageRoute(builder: (context){
               return Scaffold(
                 appBar: AppBar(title: Text('data'),),
@@ -104,13 +101,17 @@ class _TextFieldPageState extends State<TextFieldPage> {
           },
         ),
         _getButtonBar(context),
+        _buildWrap(),
+        _buildTapWrap()
     ];
   }
 
+  // StatefulWidget 类型的不用传context
+  // StatelessWidget 则需要传(BuildContext context)
   Widget _getButtonBar(BuildContext context) {
     const kAlignmentType = <String, AlignmentDirectional> {
-      'Start':AlignmentDirectional.topStart,
-      'Center':AlignmentDirectional.topCenter,
+      'webType1':AlignmentDirectional.topStart,
+      'webType2':AlignmentDirectional.topCenter,
     };
     // return Material(
     //   color: Theme.of(context).primaryColorLight,
@@ -118,7 +119,7 @@ class _TextFieldPageState extends State<TextFieldPage> {
     return  Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          ListTile(title: Text('data'),
+          ListTile(title: Text('webType'),
           trailing: DropdownButton<AlignmentDirectional>(
             value: _alignmentDirectional,
             onChanged: (AlignmentDirectional newValue) {
@@ -135,6 +136,56 @@ class _TextFieldPageState extends State<TextFieldPage> {
         ],
       );
     // );
+  }
+
+  Widget _buildWrap() {
+    return Wrap(
+      // Gap between adjecent chips.
+      spacing: 8,
+      // Gap between lines.
+      runSpacing: 4,
+      direction: Axis.horizontal,
+      children: [
+        '动漫新番',
+        '妖精的尾巴',
+        '银魂'
+      ].map(
+        (String name) => Chip(
+          avatar:CircleAvatar(child: Text(name.substring(0, 1))),
+          label: Text(name),
+          onDeleted: name == '妖精的尾巴' ? null : () => print('object'),
+        )
+      ).toList(),
+    );
+  }
+
+  Widget _buildTapWrap() {
+    return Wrap(
+      // Gap between adjecent chips.
+      spacing: 8,
+      // Gap between lines.
+      runSpacing: 4,
+      direction: Axis.horizontal,
+      children: [
+        '动漫新番',
+        '妖精的尾巴',
+        '银魂',
+        '海贼王',
+        '火影',
+        '刀剑神域',
+      ].map(
+        (String name) => GestureDetector(
+          onTap: (){
+            print('$name');
+          },
+          child: Chip(
+            // avatar:CircleAvatar(child: Text(name.substring(0, 0))),
+            shadowColor: Colors.redAccent,
+            label: Text(name),
+          ),
+        )
+      ).toList(),
+    );
   }
 
 

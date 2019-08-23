@@ -79,7 +79,7 @@ class _TextFieldPageState extends State<TextFieldPage> {
               String url = 'https://baike.baidu.com/item/' + '动画新番';
               print(this._alignmentDirectional);
               Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                return FlutterWebView(url: url, barTitle: '233',);
+                return FlutterWebView(url: url,);
               }));
             }
             if (_textEditingController.text != '') {

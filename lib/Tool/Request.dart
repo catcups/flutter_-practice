@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_practice/Tool/proxy.dart';
 
 var httpClient = new HttpClient();
 
@@ -51,55 +50,53 @@ class HttpUtils {
 }
 
 class AccountEntity {
-	String accessToken;
-	String refreshToken;
+  String accessToken;
+  String refreshToken;
 
-	AccountEntity({this.accessToken, this.refreshToken});
+  AccountEntity({this.accessToken, this.refreshToken});
 
-	AccountEntity.fromJson(Map<String, dynamic> json) {
-		accessToken = json['access_token'];
-		refreshToken = json['refresh_token'];
-	}
+  AccountEntity.fromJson(Map<String, dynamic> json) {
+    accessToken = json['access_token'];
+    refreshToken = json['refresh_token'];
+  }
 
-	Map<String, dynamic> toJson() {
-		final Map<String, dynamic> data = new Map<String, dynamic>();
-		data['access_token'] = this.accessToken;
-		data['refresh_token'] = this.refreshToken;
-		return data;
-	}
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['access_token'] = this.accessToken;
+    data['refresh_token'] = this.refreshToken;
+    return data;
+  }
 }
 
 class UserEntity {
-	String avatarUrl;
-	String name;
-	int id;
-	String blog;
+  String avatarUrl;
+  String name;
+  int id;
+  String blog;
 
-	UserEntity({this.avatarUrl, this.name, this.id, this.blog});
+  UserEntity({this.avatarUrl, this.name, this.id, this.blog});
 
-	UserEntity.fromJson(Map<String, dynamic> json) {
-		avatarUrl = json['avatar_url'];
-		name = json['name'];
-		id = json['id'];
-		blog = json['blog'];
-	}
+  UserEntity.fromJson(Map<String, dynamic> json) {
+    avatarUrl = json['avatar_url'];
+    name = json['name'];
+    id = json['id'];
+    blog = json['blog'];
+  }
 
-	Map<String, dynamic> toJson() {
-		final Map<String, dynamic> data = new Map<String, dynamic>();
-		data['avatar_url'] = this.avatarUrl;
-		data['name'] = this.name;
-		data['id'] = this.id;
-		data['blog'] = this.blog;
-		return data;
-	}
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['avatar_url'] = this.avatarUrl;
+    data['name'] = this.name;
+    data['id'] = this.id;
+    data['blog'] = this.blog;
+    return data;
+  }
 }
 
-
-class BaseEntity<T>{
-
+class BaseEntity<T> {
   int code;
   String message;
   T data;
-  
+
   BaseEntity(this.code, this.message, this.data);
 }
